@@ -1,3 +1,5 @@
+#!/usr/bin/env zsh
+
 # Pure
 # by Sindre Sorhus
 # https://github.com/sindresorhus/pure
@@ -183,7 +185,7 @@ prompt_pure_preprompt_render() {
 
 	if [[ $1 == precmd ]]; then
 		# Initial newline, for spaciousness.
-		print
+		# print
 	elif [[ $prompt_pure_last_prompt != $expanded_prompt ]]; then
 		# Redraw the prompt.
 		prompt_pure_reset_prompt
@@ -217,7 +219,9 @@ prompt_pure_precmd() {
 	fi
 	# When VIRTUAL_ENV_DISABLE_PROMPT is empty, it was unset by the user and
 	# Pure should take back control.
-	if [[ -n $VIRTUAL_ENV ]] && [[ -z $VIRTUAL_ENV_DISABLE_PROMPT || $VIRTUAL_ENV_DISABLE_PROMPT = 12 ]]; then
+	if [[ -n $VIRTUAL_ENV ]] \
+		&& [[ -z $VIRTUAL_ENV_DISABLE_PROMPT || $VIRTUAL_ENV_DISABLE_PROMPT = 12 ]] \
+		&& [[ "${VIRTUAL_ENV:t}" != "global" ]]; then
 		psvar[12]="${VIRTUAL_ENV:t}"
 		export VIRTUAL_ENV_DISABLE_PROMPT=12
 	fi
